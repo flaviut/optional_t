@@ -1,4 +1,3 @@
-<div class="document" id="documentId">
   <div class="container">
     <h1 class="title">Module optional_t</h1>
     <div class="row">
@@ -150,15 +149,5 @@ Can be used as<blockquote><p><dl class="docutils"><dt>if myOption:</dt>
 
 </dl></div>
 
-  </div>
-</div>
-
-    <div class="row">
-      <div class="twelve-columns footer">
-        <span class="nim-sprite"></span>
-        <br>
-        <small>Made with Nim. Generated: 2015-01-10 13:47:53 UTC</small>
-      </div>
-    </div>
   </div>
 </div>
