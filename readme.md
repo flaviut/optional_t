@@ -1,3 +1,4 @@
+<div class="document" id="documentId">
   <div class="container">
     <h1 class="title">Module optional_t</h1>
     <div class="row">
@@ -37,6 +38,8 @@
     title="unsafeGet[T](self: Option[T]): T"><wbr />unsafe<wbr />Get</a></li>
   <li><a class="reference" href="#get,Option[T]"
     title="get[T](self: Option[T]): T"><wbr />get</a></li>
+  <li><a class="reference" href="#get,Option[T],T"
+    title="get[T](self: Option[T]; default: T): T"><wbr />get</a></li>
   <li><a class="reference" href="#map,Option[T],proc(T)"
     title="map[T, R](self: Option[T]; oper: proc (input: T): R): Option[R]"><wbr />map</a></li>
   <li><a class="reference" href="#$,Option[T]"
@@ -109,17 +112,22 @@
 </dd>
 <dt id="unsafeGet"><a name="unsafeGet,Option[T]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">unsafeGet</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Option</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
 <dd>
-
+Gets the value in <cite>self</cite>. If <cite>self</cite> is None, then behavior is undefined
 
 </dd>
 <dt id="get"><a name="get,Option[T]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">get</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Option</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
 <dd>
+Get <cite>self</cite>'s value if <cite>self</cite> is Some, otherwise fail and raise an exception
 
+</dd>
+<dt id="get"><a name="get,Option[T],T"></a><pre><span class="Keyword">proc</span> <span class="Identifier">get</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Option</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">default</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
+<dd>
+If <cite>self</cite> is Some, then return <cite>self</cite>'s value If <cite>self</cite> is None, then return <cite>default</cite>
 
 </dd>
 <dt id="map"><a name="map,Option[T],proc(T)"></a><pre><span class="Keyword">proc</span> <span class="Identifier">map</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">,</span> <span class="Identifier">R</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Option</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">oper</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">input</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">R</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Option</span><span class="Other">[</span><span class="Identifier">R</span><span class="Other">]</span></pre></dt>
 <dd>
-
+If <cite>self</cite> is Some, then <cite>oper</cite> is executed with it's value and returned. Otherwise, None is returned.
 
 </dd>
 <dt id="$"><a name="$,Option[T]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">`$`</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Option</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
@@ -139,8 +147,11 @@
 <dl class="item">
 <dt id="toBool"><a name="toBool.c,Option[T]"></a><pre><span class="Keyword">converter</span> <span class="Identifier">toBool</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">Option</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
 <dd>
-Can be used as<blockquote><p><dl class="docutils"><dt>if myOption:</dt>
-<dd>discard myOption.get</dd>
+Can be used as
+<pre><code>
+if myOption:
+  discard myOption.get
+</code></pre>
 </dl>
 </p></blockquote>
 
