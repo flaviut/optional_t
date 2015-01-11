@@ -33,6 +33,14 @@ proc get*[T](self: Option[T]): T =
   else:
     raise newException(FieldError, "Cannot fetch value from a None")
 
+proc get*[T](self: Option[T], default: T): T = 
+  ## If `self` is Some, then return `self`'s value
+  ## If `self` is None, then return `default`
+  if self.isSome:
+    return self.unsafeGet
+  else:
+    return default
+
 proc map*[T, R](self: Option[T], oper: proc (input: T): R): Option[R] =
   if self:
     return Some(oper(self.unsafeGet))
