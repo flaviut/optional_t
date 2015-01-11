@@ -26,8 +26,14 @@ proc None*[T](): Option[T] =
 proc isSome*[T](self: Option[T]): bool = ( self.kind == OptionType.Some )
 proc isNone*[T](self: Option[T]): bool = ( self.kind == OptionType.None )
 
-proc unsafeGet*[T](self: Option[T]): T = ( self.val )
+proc unsafeGet*[T](self: Option[T]): T =
+  ## Gets the value in `self`. If `self` is None, then behavior
+  ## is undefined
+  self.val
+
 proc get*[T](self: Option[T]): T = 
+  ## Get `self`'s value if `self` is Some, otherwise fail and
+  ## raise an exception
   if self.isSome:
     return self.unsafeGet
   else:
@@ -42,6 +48,8 @@ proc get*[T](self: Option[T], default: T): T =
     return default
 
 proc map*[T, R](self: Option[T], oper: proc (input: T): R): Option[R] =
+  ## If `self` is Some, then `oper` is executed with it's
+  ## value and returned. Otherwise, None is returned.
   if self:
     return Some(oper(self.unsafeGet))
   else:
