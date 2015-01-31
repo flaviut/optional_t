@@ -1,7 +1,7 @@
 = optional_t
 
 == What is optional_t
-A simple library for an `Option[T]`. The goal is to have clear syntax and to be
+A simple library for an `Option[T]`. The goal is to have clear syntax and be
 easy to use.
 
 == Usage
@@ -10,8 +10,8 @@ easy to use.
 
 - `Some("some value")` creates an `Option[string]` that has a value.
 - `None[string]()` creates a value of the same type, but without a value.
-- `var foo: Option[string]` creates a `None[String]()` because the default
-  initialization value is `None`.
+- `var foo: Option[string]` has a value of `None[String]()`. In other words,
+  `foo == None[String]()`
 - `Some[string](nil)` is invalid: the value inside a `Some[ref T]` is required
   to never be nil. This is only validated in debug mode, the check is disabled
   in release mode unless assertions are enabled.
@@ -39,7 +39,7 @@ easy to use.
 
 `$` and `==` work as expected.
 
-*Note*: If `optional_t.nonstrict` is imported, then all `Option[T]`s are
+*Note*: If `optional_t.nonstrict` is imported, then all `Option[T]` s are
 automatically unpack where necessary. This uses a converter, so the laziness
 might lead to odd errors.
 
