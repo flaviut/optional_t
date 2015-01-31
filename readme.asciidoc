@@ -11,7 +11,7 @@ easy to use.
 - `Some("some value")` creates an `Option[string]` that has a value.
 - `None[string]()` creates a value of the same type, but without a value.
 - `var foo: Option[string]` has a value of `None[String]()`. In other words,
-  `foo == None[String]()`
+  `foo == None[String]()`.
 - `Some[string](nil)` is invalid: the value inside a `Some[ref T]` is required
   to never be nil. This is only validated in debug mode, the check is disabled
   in release mode unless assertions are enabled.
@@ -40,6 +40,6 @@ easy to use.
 `$` and `==` work as expected.
 
 *Note*: If `optional_t.nonstrict` is imported, then all `Option[T]` s are
-automatically unpack where necessary. This uses a converter, so the laziness
+automatically unpacked where necessary. This uses a converter, so the laziness
 might lead to odd errors.
 
