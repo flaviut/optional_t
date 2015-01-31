@@ -1,0 +1,45 @@
+= optional_t
+
+== What is optional_t
+A simple library for an `Option[T]`. The goal is to have clear syntax and to be
+easy to use.
+
+== Usage
+
+=== Construction
+
+- `Some("some value")` creates an `Option[string]` that has a value.
+- `None[string]()` creates a value of the same type, but without a value.
+- `var foo: Option[string]` creates a `None[String]()` because the default
+  initialization value is `None`.
+- `Some[string](nil)` is invalid: the value inside a `Some[ref T]` is required
+  to never be nil. This is only validated in debug mode, the check is disabled
+  in release mode unless assertions are enabled.
+
+=== Operations
+
+`isNone(Option[T]): bool` ::
+  returns `true` if the `Option[T]` is `None`, otherwise returns `false`.
+`isSome(Option[T]): bool` ::
+  returns `not isNone(...)`
+`get(Option[T], [default: T]): T` ::
+  Gets the value from the `Option[T]`. If the `Option[T]` is `None`, it raises
+  an exception unless `default` is passed, in which case it returns `default`.
+`unsafeGet(Option[T]): T` ::
+  Gets the value inside the `Option[T]`, behavior is undefined if it is `None`.
+  You probably don't need this, the C optimizer is pretty good. Worry about the
+  humans, not the computer.
+`map(Option[T], proc(T): R): R` ::
+  If the `Option[T]` is not `None`, the passed procedure is executed with it's
+  value as a parameter, otherwise a `None` is returned without executing the
+  passed procedure.
+`if myOptionT: ...` ::
+  The `if` condition evaluates to `true` if the value is `Some`, otherwise it
+  evaluates to `false`.
+
+`$` and `==` work as expected.
+
+*Note*: If `optional_t.nonstrict` is imported, then all `Option[T]`s are
+automatically unpack where necessary. This uses a converter, so the laziness
+might lead to odd errors.
+
